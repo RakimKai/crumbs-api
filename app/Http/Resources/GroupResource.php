@@ -18,6 +18,10 @@ class GroupResource extends JsonResource
             'id'=>(string)$this->id,
             'name' => $this->name,
             'created_at'=>$this->created_at,
+            'admin' => [
+                'id'=>(string)$this->admin_id,
+                'name' => $this->admin->name
+            ],
         ];
     }
 }

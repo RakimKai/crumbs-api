@@ -5,22 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Group extends Model
+class PendingRequest extends Model
 {
     use HasFactory;
-    protected $table = 'groups';
-    
+    protected $table = 'pending_requests';
+
     protected $fillable = [
-        'name',
-        'privacy',
-        'admin_id'
+        'group_id',
+        'user_id',
     ];
 
-    public function users()
-    {
-        return $this->belongsToMany(User::class);
-    }
-    public function admin(){
+    public function user(){
         return $this->belongsTo(User::class);        
+    }
+    public function group(){
+        return $this->belongsTo(Group::class);        
     }
 }
