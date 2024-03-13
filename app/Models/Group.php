@@ -16,7 +16,7 @@ class Group extends Model
         'admin_id',
         'image',
         'description',
-        'membersCount'
+        'members_count'
     ];
 
     public function users()
