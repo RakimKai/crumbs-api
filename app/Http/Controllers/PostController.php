@@ -16,8 +16,6 @@ class PostController extends Controller
     public function store(CreatePostRequest $request) {
         $request->validated($request->all());
 
-        
-
         $post = Post::create([
             'user_id'=>Auth::user()->id,
             'group_id'=>$request->group_id,

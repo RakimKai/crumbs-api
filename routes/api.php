@@ -4,12 +4,11 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
-use App\Models\Group;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/login',[AuthController::class,'login']);
 Route::post('/register',[AuthController::class,'register']);
+Route::get('group/index',[GroupController::class,'getAll']);
 
 Route::group(['middleware'=>['auth:sanctum']],function(){
 
@@ -22,7 +21,6 @@ Route::group(['middleware'=>['auth:sanctum']],function(){
     Route::group(['prefix'=>'group'],function(){
         Route::post('',[GroupController::class,'store']);
         Route::post('/join/{id}',[GroupController::class,'join']);
-        Route::get('/getAll',[GroupController::class,'getAll']);
         Route::get('/{id}',[GroupController::class,'get']);
         Route::delete('/{id}',[GroupController::class,'delete']);
     });
@@ -32,6 +30,6 @@ Route::group(['middleware'=>['auth:sanctum']],function(){
         Route::post('/{id}',[PostController::class,'update']);
         Route::get('/{id}',[PostController::class,'get']);
         Route::delete('/{id}',[PostController::class,'delete']);
-        Route::get('/getAll/{id}',[PostController::class,'getAll']);
+        Route::get('/index/{id}',[PostController::class,'getAll']);
     });
 });
