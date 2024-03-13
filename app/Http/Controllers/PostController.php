@@ -29,12 +29,12 @@ class PostController extends Controller
             $post->image = $path;
         }
         
-        return $this->success(['post'=>new PostResource($post)],'Post successfully created',200);
+        return $this->success(new PostResource($post),'Post successfully created',200);
     }
     public function get($id)
     {
         $post = Post::find($id);
-        if($post) return $this->success(['post'=>new PostResource($post)],'Post successfully fetched',200);
+        if($post) return $this->success(new PostResource($post),'Post successfully fetched',200);
         else return $this->error(null,"Post not found",404);
     }
 
@@ -42,7 +42,7 @@ class PostController extends Controller
     {
         $posts = Post::where('group_id', $groupId)->get();
         $postsResource = PostResource::collection($posts);
-        return $this->success(['posts'=>($postsResource)],'Posts successfully fetched',200);
+        return $this->success($postsResource,'Posts successfully fetched',200);
     }
 
     public function update(Request $request, $id)
@@ -58,7 +58,7 @@ class PostController extends Controller
 
         $post->update($request->except(['image']));
         
-        return $this->success(['post'=>new PostResource($post)],'Post successfully modified',200);
+        return $this->success(new PostResource($post),'Post successfully modified',200);
     }
 
     public function delete($id)

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/login',[AuthController::class,'login']);
 Route::post('/register',[AuthController::class,'register']);
-Route::get('group/index',[GroupController::class,'getAll']);
+Route::get('/group/index',[GroupController::class,'getAll']);
 
 Route::group(['middleware'=>['auth:sanctum']],function(){
 

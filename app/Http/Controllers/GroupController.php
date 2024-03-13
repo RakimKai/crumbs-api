@@ -20,14 +20,14 @@ class GroupController extends Controller
             'privacy'=>$request->privacy,
             'admin_id'=>Auth::user()->id
         ]);
-        return $this->success(['group'=>new GroupResource($group)],'Group successfully created',200);
+        return $this->success(new GroupResource($group),'Group successfully created',200);
     }
 
     public function get($id)
     {
         $group = Group::find($id);
         if($group){
-            return $this->success(['group'=>new GroupResource($group)],'Group successfully fetched',200);
+            return $this->success(new GroupResource($group),'Group successfully fetched',200);
         }
         else return $this->error(null,"Group doesn't exist",404);
     }
@@ -36,7 +36,7 @@ class GroupController extends Controller
     {
         $groups = Group::all();
         $groups = GroupResource::collection($groups);
-        return $this->success(['groups'=>($groups)],'Groups successfully fetched',200);
+        return $this->success($groups,'Groups successfully fetched',200);
     }
 
 
