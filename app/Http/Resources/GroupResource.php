@@ -18,6 +18,9 @@ class GroupResource extends JsonResource
             'id'=>(string)$this->id,
             'name' => $this->name,
             'created_at'=>$this->created_at,
+            'description'=>$this->description,
+            'membersCount'=>$this->membersCount,
+            'image'=>$this->image,
             'admin' => [
                 'id'=>(string)$this->admin_id,
                 'name' => $this->admin->name

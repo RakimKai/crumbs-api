@@ -20,6 +20,7 @@ Route::group(['middleware'=>['auth:sanctum']],function(){
 
     Route::group(['prefix'=>'group'],function(){
         Route::post('',[GroupController::class,'store']);
+        Route::post('/{id}',[GroupController::class,'update']);
         Route::post('/join/{id}',[GroupController::class,'join']);
         Route::get('/{id}',[GroupController::class,'get']);
         Route::delete('/{id}',[GroupController::class,'delete']);

@@ -7,6 +7,7 @@ use App\Http\Resources\GroupResource;
 use App\Models\Group;
 use App\Models\PendingRequest;
 use App\Traits\HttpResponses;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class GroupController extends Controller
@@ -18,8 +19,16 @@ class GroupController extends Controller
         $group = Group::create([
             'name'=>$request->name,
             'privacy'=>$request->privacy,
+            'description'=>$request->description,
             'admin_id'=>Auth::user()->id
         ]);
+
+        if($request->image){
+            $fileName = $request->file('image')->getClientOriginalName();
+            $path = url('/storage/images/' . $fileName);
+            $request->file('image')->storeAs('images',$fileName,'public'); 
+            $group->image = $path;
+        }
         return $this->success(new GroupResource($group),'Group successfully created',200);
     }
 
@@ -39,6 +48,21 @@ class GroupController extends Controller
         return $this->success($groups,'Groups successfully fetched',200);
     }
 
+    public function update(Request $request, $id)
+    {
+        $post = Group::find($id);
+
+        if($request->image){
+            $fileName = $request->file('image')->getClientOriginalName();
+            $path = url('/storage/images/' . $fileName);
+            $request->file('image')->storeAs('images',$fileName,'public'); 
+            $post->image = $path;
+        }
+
+        $post->update($request->except(['image']));
+        
+        return $this->success(new GroupResource($post),'Group successfully modified',200);
+    }
 
     public function delete($id)
     {

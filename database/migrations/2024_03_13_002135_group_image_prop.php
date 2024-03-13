@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::table('groups', function (Blueprint $table) {
+            $table->string('image')->nullable();
+            $table->string('description')->nullable();
+            $table->integer('membersCount')->default(0);
+        });
     }
-
+                    
     /**
      * Reverse the migrations.
      */
