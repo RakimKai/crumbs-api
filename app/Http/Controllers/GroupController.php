@@ -16,19 +16,21 @@ class GroupController extends Controller
     
     public function store(CreateGroupRequest $request) {
         $request->validated($request->all());
-        $group = Group::create([
-            'name'=>$request->name,
-            'privacy'=>$request->privacy,
-            'description'=>$request->description,
-            'admin_id'=>Auth::user()->id
-        ]);
-
+        $path=null;
         if($request->image){
             $fileName = $request->file('image')->getClientOriginalName();
             $path = url('/storage/images/' . $fileName);
             $request->file('image')->storeAs('images',$fileName,'public'); 
-            $group->image = $path;
         }
+
+        $group = Group::create([
+            'name'=>$request->name,
+            'privacy'=>$request->privacy,
+            'description'=>$request->description,
+            'admin_id'=>Auth::user()->id,
+            'image'=>$path
+        ]);
+
         return $this->success(new GroupResource($group),'Group successfully created',200);
     }
 
