@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateGroupRequest;
 use App\Http\Resources\GroupResource;
 use App\Models\Group;
+use App\Models\GroupsUsers;
 use App\Models\PendingRequest;
 use App\Notifications\UserNotification;
 use App\Traits\HttpResponses;
@@ -31,6 +32,8 @@ class GroupController extends Controller
             'admin_id'=>Auth::user()->id,
             'image'=>$path
         ]);
+
+        GroupsUsers::create(['group_id'=>$group->id,'user_id'=>Auth::user()->id]);
 
         return $this->success(new GroupResource($group),'Group successfully created',200);
     }

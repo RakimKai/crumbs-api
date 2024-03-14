@@ -53,7 +53,7 @@ class UserNotification extends Notification implements ShouldQueue
                 'image'=>$this->user->image,
                 'username'=>$this->user->username,
                 'created_at'=>Carbon::now()
-        ];
+            ];
     }
 
     public function broadcastType()

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserResource;
+use App\Models\GroupsUsers;
 use App\Models\User;
 use App\Traits\HttpResponses;
 use Illuminate\Http\Request;
@@ -20,7 +22,13 @@ class UserController extends Controller
     }
 
     public function get(){
-        return $this->success(['user'=>Auth::user()],'User successfully fetched',200);
+        $user = Auth::user();
+        return $this->success($user,'User successfully fetched',200);
+    }
+
+    public function getAll($groupId){
+        $users = GroupsUsers::where('group_id',$groupId)->get();
+        return $this->success($users,'Users successfully fetched',200);
     }
     
     public function update(Request $request){
