@@ -6,6 +6,7 @@ use App\Http\Requests\CreateGroupRequest;
 use App\Http\Resources\GroupResource;
 use App\Models\Group;
 use App\Models\PendingRequest;
+use App\Notifications\UserNotification;
 use App\Traits\HttpResponses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -77,6 +78,7 @@ class GroupController extends Controller
     {
         $user = Auth::user();
         $group = Group::find($groupId);
+        $group->admin->notify(new UserNotification($user));
 
         if (PendingRequest::where('group_id', $group->id)->where('user_id', $user->id)->exists()) {
             return $this->error(null,"User already has a pending request for this group.",400);
