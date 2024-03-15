@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\NotificationsResource;
 use App\Models\User;
 use App\Traits\HttpResponses;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class NotificationsController extends Controller
         $userNotifications = DB::table('notifications')
         ->whereJsonContains('data->id', $user->id)
         ->get();
-        return $userNotifications;
+        return new NotificationsResource($userNotifications);
     }
 
 
