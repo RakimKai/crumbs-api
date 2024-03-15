@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('groups', function (Blueprint $table) {
             $table->string('image')->nullable();
             $table->string('description')->nullable();
-            $table->integer('members_count')->default(0);
+            $table->integer('members_count')->default(1);
         });
     }
                     

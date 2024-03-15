@@ -27,7 +27,7 @@ class GroupController extends Controller
 
         $group = Group::create([
             'name'=>$request->name,
-            'privacy'=>$request->privacy,
+            'privacy'=>(int)$request->privacy,
             'description'=>$request->description,
             'admin_id'=>Auth::user()->id,
             'image'=>$path
