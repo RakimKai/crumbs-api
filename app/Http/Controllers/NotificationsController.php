@@ -18,7 +18,8 @@ class NotificationsController extends Controller
         $userNotifications = DB::table('notifications')
         ->whereJsonContains('data->id', $user->id)
         ->get();
-        return new NotificationsResource($userNotifications);
+        $notificationsCollection = NotificationsResource::collection($userNotifications);
+        return $notificationsCollection;
     }
 
 
