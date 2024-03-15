@@ -18,7 +18,7 @@ class NotificationsResource extends JsonResource
             'id'=>$this->id,
             'user'=>json_decode($this->data),
             'created_at'=>$this->created_at,
-            'read'=>$this->read_at
+            'read'=>$this->read_at ? true : false
         ];
     }
 }
