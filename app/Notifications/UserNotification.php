@@ -49,7 +49,7 @@ class UserNotification extends Notification implements ShouldQueue
     public function toArray( $notifiable): array
     {
             return [
-                'id'=>$this->id,
+                'id'=>$this->user->id,
                 'name' => $this->user->name,
                 'image'=>$this->user->image,
                 'username'=>$this->user->username,
