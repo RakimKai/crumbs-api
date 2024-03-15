@@ -42,6 +42,6 @@ Route::group(['middleware'=>['auth:sanctum']],function(){
 
     
     Route::group(['prefix'=>'notifications'],function(){
-        Route::get('/{id}',[NotificationsController::class,'index']);
+        Route::get('/',[NotificationsController::class,'index']);
     });
 });
