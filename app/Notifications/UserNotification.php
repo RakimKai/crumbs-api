@@ -46,7 +46,7 @@ class UserNotification extends Notification implements ShouldQueue
      *
      * @return array<string, mixed>
      */
-    public function toArray( $notifiable): array
+    public function toArray(): array
     {
             return [
                 'id'=>$this->user->id,

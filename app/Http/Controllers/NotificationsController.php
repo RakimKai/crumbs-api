@@ -13,13 +13,13 @@ class NotificationsController extends Controller
 {
     use HttpResponses;
 
-    public function index(){
+    public function index(Request $request){
         $user = Auth::user();
         $userNotifications = DB::table('notifications')
         ->whereJsonContains('data->id', $user->id)
-        ->get();
+        ->paginate($request->query('perPage'));
         $notificationsCollection = NotificationsResource::collection($userNotifications);
-        return $this->success($notificationsCollection,'Notification sent.',200); ;
+        return $notificationsCollection;
     }
 
 
