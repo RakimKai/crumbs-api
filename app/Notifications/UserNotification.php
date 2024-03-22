@@ -14,13 +14,15 @@ class UserNotification extends Notification implements ShouldQueue
 {
     use Queueable;
     private $user;
+    private $notifiedUser;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct(User $user)
+    public function __construct(User $user, User $notifiedUser)
     {
         $this->user = $user;
+        $this->notifiedUser = $notifiedUser;
     }
 
     /**
@@ -49,7 +51,7 @@ class UserNotification extends Notification implements ShouldQueue
     public function toArray(): array
     {
             return [
-                'id'=>$this->user->id,
+                'id'=>$this->notifiedUser->id,
                 'name' => $this->user->name,
                 'image'=>$this->user->image,
                 'username'=>$this->user->username,
