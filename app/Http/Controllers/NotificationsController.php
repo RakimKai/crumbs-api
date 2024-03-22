@@ -28,6 +28,5 @@ class NotificationsController extends Controller
         DB::table('notifications')->whereJsonContains('data->id', Auth::user()->id)->update(['read_at'=>now()]);
         return $this->success(null,'You have successfully marked all notifications as read',200);
     }
-
-
+    
 }
