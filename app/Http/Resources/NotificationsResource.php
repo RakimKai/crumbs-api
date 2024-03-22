@@ -18,7 +18,7 @@ class NotificationsResource extends JsonResource
             'id'=>$this->id,
             'user'=>json_decode($this->data),
             'created_at'=>$this->created_at,
-            'descripion'=>'Has sent a request to join your group.',
+            'description' => 'Has sent you a request to join your group',
             'read'=>$this->read_at ? true : false
         ];
     }
