@@ -19,7 +19,7 @@ class NotificationsController extends Controller
         ->whereJsonContains('data->id', $user->id)
         ->get();
         $notificationsCollection = NotificationsResource::collection($userNotifications);
-        return $notificationsCollection;
+        return $this->success($notificationsCollection,'Notification sent.',200); ;
     }
 
 

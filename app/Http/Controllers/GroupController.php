@@ -81,16 +81,18 @@ class GroupController extends Controller
     {
         $user = Auth::user();
         $group = Group::find($groupId);
-        $group->admin->notify(new UserNotification($user));
-
+        
         if (PendingRequest::where('group_id', $group->id)->where('user_id', $user->id)->exists()) {
             return $this->error(null,"User already has a pending request for this group.",400);
         }
-
+        
         $pendingRequest = PendingRequest::create([
             'group_id'=>$group->id,
             'user_id'=>$user->id
         ]);
-        return $this->success(['request'=>($pendingRequest)],'Join request sent successfully',200);
+
+        $group->admin->notify(new UserNotification($user));
+        
+        return $this->success($pendingRequest,'Join request sent successfully',200);
     }
 }
