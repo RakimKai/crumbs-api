@@ -7,6 +7,7 @@ use App\Http\Resources\GroupResource;
 use App\Models\Group;
 use App\Models\GroupsUsers;
 use App\Models\PendingRequest;
+use App\Models\User;
 use App\Notifications\UserNotification;
 use App\Traits\HttpResponses;
 use Illuminate\Http\Request;
@@ -90,8 +91,8 @@ class GroupController extends Controller
             'group_id'=>$group->id,
             'user_id'=>$user->id
         ]);
-
-        $group->admin->notify(new UserNotification($user));
+        $admin = User::where('id',$group->admin_id);
+        $group->admin->notify(new UserNotification($admin));
         
         return $this->success($pendingRequest,'Join request sent successfully',200);
     }
